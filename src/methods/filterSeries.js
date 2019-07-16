@@ -3,17 +3,13 @@
 const mapSeries = require('./mapSeries')
 
 /**
- * Asynchronously filter the given `array` using the provided `callback`.
- * At first, this function uses an async version of Array.map to run the
- * `callback` on every item. This returns an array of boolean values,
- * like `[ true, false, true ]`. The final filter results will be
- * calculated based on the boolean results and only those items
- * having a `true` result in the boolean array will survive.
+ * Asynchronous version of Array#filter(), running the (async) testing
+ * function **in series**. The `callback` should return `true`
+ * if an item should be included in the resulting collection.
  *
- * @param {Array} array
  * @param {Function} callback
  *
- * @returns {Array} resulting array of filtered items
+ * @returns {Collection}
  */
 module.exports = async function filter (array, callback) {
   const mapped = await mapSeries(array, callback)
